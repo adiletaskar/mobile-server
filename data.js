@@ -2,7 +2,7 @@ products = [
   {
     id: 1,
     name: "apple",
-    img: "/images/apple",
+    img: "/images/apple.jpg",
     rating: "5",
     buys: 250,
     price: 500,
@@ -11,7 +11,7 @@ products = [
   {
     id: 2,
     name: "orange",
-    img: "/images/apple",
+    img: "/images/orange.jpg",
     rating: "5",
     buys: 250,
     price: 500,
@@ -20,7 +20,7 @@ products = [
   {
     id: 3,
     name: "banana",
-    img: "/images/apple",
+    img: "/images/banana.jpg",
     rating: "5",
     buys: 250,
     price: 500,
@@ -28,8 +28,8 @@ products = [
   },
   {
     id: 4,
-    name: "potato",
-    img: "/images/apple",
+    name: "ananas",
+    img: "/images/ananas.jpg",
     rating: "5",
     buys: 250,
     price: 500,
@@ -38,7 +38,7 @@ products = [
   {
     id: 5,
     name: "strawberry",
-    img: "/images/apple",
+    img: "/images/strawberry.jpg",
     rating: "5",
     buys: 250,
     price: 500,
@@ -47,7 +47,7 @@ products = [
   {
     id: 6,
     name: "cherry",
-    img: "/images/apple",
+    img: "/images/cherry.jpg",
     rating: "5",
     buys: 250,
     price: 500,
@@ -56,7 +56,7 @@ products = [
   {
     id: 7,
     name: "pear",
-    img: "/images/apple",
+    img: "/images/pear.jpg",
     rating: "5",
     buys: 250,
     price: 500,

@@ -21,7 +21,7 @@ app.get("/api/products", function (req, res) {
 
 app.get("/images/:imageName", (req, res) => {
   const { imageName } = req.params;
-  const url = path.join(__dirname, `/images/${imageName}.jpg`);
+  const url = path.join(__dirname, `/images/${imageName}`);
   res.sendFile(url);
 });
 
