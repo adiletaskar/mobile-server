@@ -1,22 +1,13 @@
 const express = require("express");
-const products = require("./data");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
-
+const productRouter = require("./routes/products");
 app.use(bodyParser.json());
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
-app.get("/api/products", function (req, res) {
-  const { title } = req.query;
-  const sortedProducts = products.filter((product) =>
-    product.name.includes(title.toLowerCase())
-  );
-  if (sortedProducts.length > 0) {
-    return res.json({ success: true, data: sortedProducts });
-  }
-  res.json({ success: false });
+
+app.use("/api/products", productRouter);
+app.get("/", (req, res) => {
+  res.send("Hello its a Adilet's projects server side");
 });
 
 app.get("/images/:imageName", (req, res) => {
