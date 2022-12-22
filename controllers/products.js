@@ -16,7 +16,8 @@ const getProducts = async (req, res) => {
 const getSortedProducts = async (req, res) => {
   try {
     const { name } = req.params;
-    const sortedProducts = await Product.find({ name: { $regex: name } });
+    const lowerName = name.toLowerCase();
+    const sortedProducts = await Product.find({ name: { $regex: lowerName } });
     if (sortedProducts.length > 0) {
       return res.json({ success: true, data: sortedProducts });
     }
