@@ -3,9 +3,15 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 const productRouter = require("./routes/products");
+require("dotenv").config();
+const connectDB = require("./db/connect");
+//middleware
 app.use(bodyParser.json());
+app.use(express.json());
 
+//routes
 app.use("/api/products", productRouter);
+
 app.get("/", (req, res) => {
   res.send("Hello its a Adilet's projects server side");
 });
@@ -16,6 +22,17 @@ app.get("/images/:imageName", (req, res) => {
   res.sendFile(url);
 });
 
-app.listen(3454, () => {
-  console.log("server is listening");
-});
+port = 8080;
+
+//start server
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () => {
+      console.log(`server is listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+start();
