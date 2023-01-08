@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 const productRouter = require("./routes/products");
+const userRouter = require("./routes/users");
 require("dotenv").config();
 const connectDB = require("./db/connect");
 //middleware
@@ -10,6 +11,8 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 //routes
+app.use("/users", userRouter);
+
 app.use("/api/products", productRouter);
 
 app.get("/", (req, res) => {
