@@ -3,9 +3,9 @@ const User = require("../models/User");
 const createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
-    res.status(201).json({ user });
+    res.status(201).json({ success: true, user });
   } catch (error) {
-    res.status(500).json({ msg: error });
+    res.status(500).json({ success: false, msg: error });
   }
 };
 
@@ -14,7 +14,7 @@ const findUser = async (req, res) => {
     const { email } = req.params;
     const user = await User.findOne({ email: email });
     if (user === null)
-      res.status(201).json({ succes: false, msg: "User do not exist" });
+      res.status(201).json({ success: false, msg: "User do not exist" });
     else res.status(201).json({ success: true, user });
   } catch (error) {
     res.status(500).json({
@@ -38,7 +38,7 @@ const login = async (req, res) => {
         .status(201)
         .json({ success: false, msg: "the data is incorrect" });
     }
-    res.status(201).json({ succes: true, user });
+    res.status(201).json({ success: true, user });
   } catch (error) {
     res.status(500).json({
       msg: error,
