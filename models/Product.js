@@ -14,18 +14,22 @@ const ProductSchema = mongoose.Schema({
   rating: {
     type: Number,
     required: true,
+    trim: true,
   },
   buys: {
     type: Number,
     required: true,
+    trim: true,
   },
   price: {
     type: Number,
     required: true,
+    trim: true,
   },
   desc: {
     type: String,
     required: true,
+    trim: true,
   },
 });
 
