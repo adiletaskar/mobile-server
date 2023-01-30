@@ -2,6 +2,12 @@ const User = require("../models/User");
 
 const createUser = async (req, res) => {
   try {
+    const userEmail = await User.findOne({ email: email });
+    if (userEmail !== null) {
+      return res
+        .status(201)
+        .json({ success: false, msg: "user already exist" });
+    }
     const user = await User.create(req.body);
     res.status(201).json({ success: true, user });
   } catch (error) {
@@ -45,8 +51,24 @@ const login = async (req, res) => {
     });
   }
 };
+
+const updateLikes = async (req, res) => {
+  try {
+    const { likes } = req.body;
+    const { id } = req.params;
+    const user = await User.findByIdAndUpdate(id, { $set: { likes: likes } });
+    if (user) res.status(201).json({ success: true });
+    else res.status(201).json({ success: false, msg: "something is wrong" });
+  } catch (error) {
+    res.status(500).json({
+      msg: error,
+    });
+  }
+};
+
 module.exports = {
   createUser,
   findUser,
   login,
+  updateLikes,
 };
