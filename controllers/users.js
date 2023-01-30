@@ -2,6 +2,8 @@ const User = require("../models/User");
 
 const createUser = async (req, res) => {
   try {
+    const { email } = req.body;
+
     const userEmail = await User.findOne({ email: email });
     if (userEmail !== null) {
       return res

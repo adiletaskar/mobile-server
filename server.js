@@ -25,7 +25,7 @@ app.get("/images/:imageName", (req, res) => {
   res.sendFile(url);
 });
 
-port = 8080;
+port = process.env.PORT || 8080;
 
 //start server
 const start = async () => {
