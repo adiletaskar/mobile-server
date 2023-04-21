@@ -6,8 +6,6 @@ const {
   login,
   updateLikes,
   updateCart,
-  increment,
-  decrement,
 } = require("../controllers/users");
 
 //users
@@ -18,7 +16,5 @@ router.route("/findUser=:email").get(findUser);
 router.route("/updateLikes/:id").post(updateLikes);
 //cart for users
 router.route("/updateCart/:id").post(updateCart);
-router.route("/updateCartQuantity/increment?").post(increment);
-router.route("/updateCartQuantity/decrement?").post(decrement);
 
 module.exports = router;

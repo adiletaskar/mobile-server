@@ -82,52 +82,6 @@ const updateCart = async (req, res) => {
     });
   }
 };
-const increment = async (req, res) => {
-  try {
-    const { userId, productId } = req.query;
-    const { cart } = await User.findById(userId);
-
-    let newCart = cart.map((item) => {
-      if (item._id === productId) {
-        return { ...item, quantity: item.quantity + 1 };
-      }
-      return item;
-    });
-
-    const updateCart = await User.updateOne({
-      $set: { cart: newCart },
-    });
-    if (updateCart) return res.status(201).json({ success: true });
-    res.status(201).json({ success: false, msg: "something is wrong" });
-  } catch (error) {
-    res.status(500).json({
-      msg: error,
-    });
-  }
-};
-const decrement = async (req, res) => {
-  try {
-    const { userId, productId } = req.query;
-    const { cart } = await User.findById(userId);
-
-    let newCart = cart.map((item) => {
-      if (item._id === productId) {
-        return { ...item, quantity: item.quantity - 1 };
-      }
-      return item;
-    });
-
-    const updateCart = await User.updateOne({
-      $set: { cart: newCart },
-    });
-    if (updateCart) return res.status(201).json({ success: true });
-    res.status(201).json({ success: false, msg: "something is wrong" });
-  } catch (error) {
-    res.status(500).json({
-      msg: error,
-    });
-  }
-};
 
 module.exports = {
   createUser,
@@ -135,6 +89,4 @@ module.exports = {
   login,
   updateLikes,
   updateCart,
-  increment,
-  decrement,
 };
