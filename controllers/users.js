@@ -1,8 +1,8 @@
 const User = require("../models/User");
-
+const bcrypt = require("bcrypt");
 const createUser = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { name, email, password } = req.body;
 
     const userEmail = await User.findOne({ email: email });
     if (userEmail !== null) {
@@ -10,7 +10,12 @@ const createUser = async (req, res) => {
         .status(201)
         .json({ success: false, msg: "user already exist" });
     }
-    const user = await User.create(req.body);
+    const hashPassword = bcrypt.hashSync(password, 8);
+    const user = await User.create({
+      name: name,
+      email: email,
+      password: hashPassword,
+    });
     res.status(201).json({ success: true, user });
   } catch (error) {
     res.status(500).json({ success: false, msg: error });
@@ -20,17 +25,14 @@ const createUser = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userEmail = await User.findOne({ email: email });
-    if (userEmail === null) {
-      return res
-        .status(201)
-        .json({ success: false, msg: "user doesn't exist" });
-    }
-    const user = await User.findOne({ email: email, password: password });
+
+    const user = await User.findOne({ email: email });
     if (user === null) {
-      return res
-        .status(201)
-        .json({ success: false, msg: "the data is incorrect" });
+      return res.status(404).json({ success: false, msg: "user not found" });
+    }
+    const isPassValid = bcrypt.compareSync(password, user.password);
+    if (!isPassValid) {
+      return res.status(400).json({ success: false, msg: "invalid password" });
     }
     res.status(201).json({ success: true, user });
   } catch (error) {
